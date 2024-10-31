@@ -31,21 +31,45 @@ Overview of the methods used to detect animals in heterogeneous environments on 
 
 ## Datasets
 
-Для создания и тестирования моделей в задачи детекции животных критически важно использование качественных видеодатасетов, охватывающих различные виды животных и условия съемки. Вот некоторые из самых значимых и обширных видеодатасетов:
-
 - [Video dataset of sheep activity for animal behavioral analysis via deep learning - PubMed](https://pubmed.ncbi.nlm.nih.gov/38328501/)
+- [Video dataset of sheep activity for animal behavioral analysis via deep learning - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S2352340924000015?via%3Dihub)
 - [Video Dataset of Sheep Activity (Grazing, Running, Sitting) - Mendeley Data](https://data.mendeley.com/datasets/h5ppwx6fn4/1)
+- [Video Dataset of Sheep Activity (Standing and Walking) - Mendeley Data](https://data.mendeley.com/datasets/w65pvb84dg/1)
 - [CVB: A Video Dataset of Cattle Visual Behaviors | DeepAI](https://deepai.org/publication/cvb-a-video-dataset-of-cattle-visual-behaviors)
+- [dtnguyen0304/sawit: A Small-Sized Animal Wild Image Dataset with Annotations](https://github.com/dtnguyen0304/sawit?tab=readme-ov-file)
+- [Search | Kaggle](https://www.kaggle.com/search?q=animal+video+dataset+in%3Adatasets)
+- [Version](https://universe.roboflow.com/ai-bd/animals_video2/dataset/1)
+- [Machine Learning Datasets | Papers With Code](https://paperswithcode.com/datasets?q=animals&v=lst&o=match&mod=videos&page=1)
+- [DeformingThings4D Dataset | Papers With Code](https://paperswithcode.com/dataset/deformingthings4d)
+- [TGIF Dataset | Papers With Code](https://paperswithcode.com/dataset/tgif)
+- [Animal Kingdom Dataset | Papers With Code](https://paperswithcode.com/dataset/animal-kingdom)
+- [Camouflaged Animal Dataset Dataset | Papers With Code](https://paperswithcode.com/dataset/camouflaged-animal-dataset)
+- [Causal Motion Segmentation in Moving Camera Videos](http://vis-www.cs.umass.edu/motionSegmentation/)
+- [Lindenthal Camera Traps Dataset | Papers With Code](https://paperswithcode.com/dataset/lindenthal-camera-traps)
+- [Lindenthal Camera Traps - LILA BC](https://lila.science/datasets/lindenthal-camera-traps/)
+- [MGif Dataset | Papers With Code](https://paperswithcode.com/dataset/mgif)
+- [TGIF-QA Dataset | Papers With Code](https://paperswithcode.com/dataset/tgif-qa)
+- [Dynamic Replica Dataset | Papers With Code](https://paperswithcode.com/dataset/dynamic-replica)
+- [3D-POP Dataset | Papers With Code](https://paperswithcode.com/dataset/3d-pop)
+- [DogCentric Activity Dataset | Papers With Code](https://paperswithcode.com/dataset/dogcentric-activity)
+- [SLT-Net: Implicit Motion Handling for Video Camouflaged Object Detection](https://xueliancheng.github.io/SLT-Net-project/)
+- [MoCA-Mask Dataset | Papers With Code](https://paperswithcode.com/dataset/moca-mask)
+- [Desert Lion Conservation Camera Traps - LILA BC](https://lila.science/datasets/desert-lion-conservation-camera-traps/)
 - [iWildCam 2022 - LILA BC](https://lila.science/datasets/iwildcam-2022/)
+- [Data Sets - LILA BC](https://lila.science/datasets)
+- [Amur Tiger Re-identification - LILA BC](https://lila.science/datasets/atrw)
+- [CaltechCameraTraps | Caltech Camera Trap dataset page](https://beerys.github.io/CaltechCameraTraps/)
+- [visipedia/inat_comp: iNaturalist competition details](https://github.com/visipedia/inat_comp?tab=readme-ov-file)
+- [visipedia/inat_comp: iNaturalist competition details](https://github.com/visipedia/inat_comp/tree/master)
 - [Snapshot Serengeti - LILA BC](https://lila.science/datasets/snapshot-serengeti)
-- [Caltech Camera Traps](https://beerys.github.io/CaltechCameraTraps/)
+
 
 На этих платформах собраны видеодатасеты, предназначенные для анализа поведения животных и детекции в природной среде. Они включают активность различных животных (овцы, крупный рогатый скот, дикие животные) и обеспечивают необходимую разнообразность фона, условий освещения и типов поведения.
 
 # Решение задачи детекции зайцев на видеопотоке: вопросы и ответы
 
 ## Задача
-Система должна детектировать зайцев в видеопотоке, фиксируя их в условиях естественной среды обитания — леса и поля. Основные сложности включают переменное освещение, погодные условия и разнообразие растительности.
+Система должна детектировать определенные объекты (зайцев) в видеопотоке, фиксируя их в условиях естественной среды обитания — леса и поля. Основные сложности включают переменное освещение, погодные условия и разнообразие растительности.
 
 ---
 
@@ -54,19 +78,35 @@ Overview of the methods used to detect animals in heterogeneous environments on 
 
 ### Рекомендуемые алгоритмы:
 - **YOLOv5 или SSD**: высокая скорость обработки, подходят для реального времени. Подход: однопроходная детекция объектов ([A Comprehensive Review of Deep Learning Approaches for Animal Detection on Video Data](https://www.researchgate.net/publication/376179857_A_Comprehensive_Review_of_Deep_Learning_Approaches_for_Animal_Detection_on_Video_Data)).
-- **Faster R-CNN и Mask R-CNN**: более высокая точность, возможность сегментации контуров зайцев. Подходят для сложных условий ([MOTHe GUI](https://github.com/tee-lab/MOTHe-GUI)).
+
+**Недостатки:** YOLO и SSD могут терять точность при детекции небольших объектов на дальнем расстоянии или при плотной растительности, что стоит учитывать при настройке модели.
+
+- **Faster R-CNN и Mask R-CNN**: более высокая точность, возможность сегментации контуров зайцев. Подходят для сложных условий ([MOTHe GUI](https://github.com/tee-lab/MOTHe-GUI)).  
+
+**Недостатки:** Сегментационные сети медленнее и требовательны к вычислительным ресурсам, поэтому их лучше использовать, если скорость не критична или в случаях, когда возможна предобработка кадров перед подачей в систему реального времени.
+
 - **EfficientDet**: эффективен для детекции, экономит вычислительные ресурсы, но требует GPU для реального времени.
 
-### Подходы для устойчивости:
-- **Комбинированные методы**: например, использование CNN с пороговой обработкой или Kalman Filter и алгоритм Хангариана для устойчивого отслеживания зайцев.
+### Возможный общий подход к решению:
+
+- Начать с использования YOLOv5 или EfficientDet для детекции объектов в кадре.
+- Для устойчивого отслеживания объектов можно дополнить подход Kalman-фильтром или алгоритмом Хангариана для предсказания положения в следующем кадре, как реализовано в MOTHe. Это обеспечит непрерывность отслеживания объектов между кадрами и устранит «дрожание» детекции.
+- При необходимости сегментации, если частично видимые объекты или контрастные формы животных создают ложные срабатывания, использовать Mask R-CNN.
+
+### Дополнительные техники:
+
+- Аугментация данных: Добавить вариации (яркость, контраст, шум) к тренировочному набору, чтобы обученная модель могла справляться с изменяющимся освещением и погодными условиями.
+- Активное обучение: Постепенно добавлять в обучающий набор сложные для модели кадры, чтобы повысить ее устойчивость к нестандартным условиям.
 
 ---
 
 ## Вопрос 2: Архитектура модели
-Для устойчивой детекции на фоне сложных условий предпочтительны архитектуры, сочетающие пространственные и временные признаки.
+Для устойчивой детекции на фоне сложных условий предпочтительны архитектуры, сочетающие пространственные  (формы и контуры объектов) и временные (движение) признаки.
 
 ### Рекомендованные архитектуры:
-- **YOLOv5 и YOLOv7**: слои свертки, residual-блоки, объединяющий слой для детекции объектов.
+- **YOLOv5 и YOLOv7**: слои свертки, residual-блоки, объединяющий слой для детекции объектов.  
+    - Особенности архитектуры: YOLO использует слои свёртки для выделения иерархических признаков и выходной слой, позволяющий делать предсказания по классам и границам объектов в одном проходе. Этот подход делает YOLO быстрым и оптимальным для задач реального времени.
+    - Оптимальные слои: Сверточные слои с разными размерами рецептивных полей, residual-блоки для улучшения обучения, а также final output layer, объединяющий детекцию объектов в одном кадре.
 - **EfficientDet с BiFPN**: с объединением признаков на разных уровнях для работы с объектами разного размера.
 - **Mask R-CNN**: слой RPN для выделения областей интереса, ROIAlign для точной сегментации.
 - **3D-CNN и ConvLSTM**: позволяют учитывать временные зависимости для более точного распознавания движения.
@@ -75,7 +115,7 @@ Overview of the methods used to detect animals in heterogeneous environments on 
 
 ## Вопрос 3: Подготовка данных
 ### Организация сбора и разметки данных:
-1. **Сбор данных**: запись видео с камеры, дополнение данными из открытых источников ([iNaturalist](https://github.com/visipedia/inat_comp)).
+1. **Сбор данных**: запись видео с камеры, дополнение данными из открытых источников (например, [iNaturalist](https://github.com/visipedia/inat_comp)).
 2. **Разметка**: ручная разметка или полуавтоматическая разметка с предобученными моделями (LabelImg, CVAT).
 3. **Аугментация данных**: изменение яркости, контраста, добавление шума, что повышает устойчивость к условиям среды.
 
